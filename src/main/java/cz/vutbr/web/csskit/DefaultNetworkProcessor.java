@@ -20,11 +20,13 @@ import cz.vutbr.web.css.NetworkProcessor;
  */
 public class DefaultNetworkProcessor implements NetworkProcessor
 {
+    public static String USER_AGENT = "jStyleParser/3.6";
 
     @Override
     public InputStream fetch(URL url) throws IOException
     {
         URLConnection con = url.openConnection();
+        con.setRequestProperty("User-Agent", USER_AGENT);
         InputStream is;
         if ("gzip".equalsIgnoreCase(con.getContentEncoding()))
             is = new GZIPInputStream(con.getInputStream());
